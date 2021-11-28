@@ -29,6 +29,8 @@ class ProductsFragment : Fragment(), View.OnClickListener, OnDeleteBtnClick,
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var productsAdapter: ProductsAdapter
     private lateinit var floatingActionButton: FloatingActionButton
+    private lateinit var deletedProduct: ProductModel
+    private lateinit var alertForDeleting: AlertDialogHelper
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,6 +55,16 @@ class ProductsFragment : Fragment(), View.OnClickListener, OnDeleteBtnClick,
         mRecyclerView = view.findViewById(R.id.recycler_view)
         floatingActionButton = view.findViewById(R.id.add_fab)
         floatingActionButton.setOnClickListener(this)
+
+        alertForDeleting = AlertDialogHelper(
+            this,
+            requireContext(),
+            "1",
+            "Warning!",
+            "Are you sure you want to delete this item?",
+            "Ok",
+            "Cancel"
+        )
     }
 
     private fun initRecyclerView() {
@@ -70,7 +82,15 @@ class ProductsFragment : Fragment(), View.OnClickListener, OnDeleteBtnClick,
 
     override fun onClick(v: View?) {
         if (v == floatingActionButton) {
-            viewModel.add(ProductModel(1, 1, "new Product", "$1000,", ""))
+            viewModel.add(
+                ProductModel(
+                    4,
+                    1,
+                    "iPad pro",
+                    "$1200,",
+                    "https://www.etisalat.ae/en/system/wst/assets/img/2021/q3/smartphones/apple/ipad-10-2-in-space-gray-wifi-p-1b-small.jpg"
+                )
+            )
                 .observe(requireActivity(), {
                     productsAdapter.setData(it)
                 })
@@ -78,16 +98,19 @@ class ProductsFragment : Fragment(), View.OnClickListener, OnDeleteBtnClick,
     }
 
     override fun onDelete(product: ProductModel) {
-        viewModel.delete(product)
+        deletedProduct = product
+        alertForDeleting.show()
+    }
+
+    override fun onPositiveButtonClicked() {
+        viewModel.delete(deletedProduct)
             .observe(requireActivity(), {
                 productsAdapter.setData(it);
             })
     }
 
-    override fun onPositiveButtonClicked() {
-    }
-
     override fun onNegativeButtonClicked() {
+        alertForDeleting.dismiss()
     }
 
 }

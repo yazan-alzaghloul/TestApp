@@ -47,14 +47,16 @@ class ProductsAdapter(
 
     private inner class CategoryHolder constructor(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
-        var imgCat: ImageView = itemView.findViewById(R.id.image_category)
-        var tvNameCat: TextView = itemView.findViewById(R.id.name_category)
+        var imgProduct: ImageView = itemView.findViewById(R.id.image_product)
+        var tvNameProduct: TextView = itemView.findViewById(R.id.name_product)
+        var tvPriceProduct: TextView = itemView.findViewById(R.id.price_product)
         var tvDelete: TextView = itemView.findViewById(R.id.tv_delete)
 
         fun setData(productModel: ProductModel) {
-            tvNameCat.text = productModel.name
+            tvNameProduct.text = productModel.name
+            tvPriceProduct.text = productModel.price
             Glide.with(context).load(productModel.image).placeholder(R.mipmap.ic_launcher)
-                .into(imgCat)
+                .into(imgProduct)
             tvDelete.setOnClickListener {
                 listener.onDelete(productModel);
             }

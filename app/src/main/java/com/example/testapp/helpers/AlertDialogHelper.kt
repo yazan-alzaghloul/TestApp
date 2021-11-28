@@ -9,7 +9,7 @@ class AlertDialogHelper(private val alertDialogInterface: AlertDialogInterface,
                         private val title: String, private val message: String,
                         private val positiveButtonText: String, private val negativeButton: String) {
 
-    private val builder = AlertDialog.Builder(context, R.style.AlertDialogTheme)
+    private val builder = AlertDialog.Builder(context)
     private lateinit var alertDialog: AlertDialog
 
     fun show() {
