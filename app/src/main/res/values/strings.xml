@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Pebg App</string>
+    <string name="gen_error">An error occurred please try again later.</string>
+    <string name="gen_please_wait">Please wait</string>
+    <string name="gen_ok">OK</string>
+    <string name="gen_no">NO</string>
+    <string name="gen_failed">Failed</string>
+    <string name="gen_success">Success</string>
+    <string name="categories">Categories</string>
+    <string name="products">Products</string>
+    <string name="delete"><i><u>Delete Item</u></i></string>
+
+</resources>
